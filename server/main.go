@@ -19,16 +19,15 @@ func main() {
 	api := app.Group("/api")
 	apiservice.ApiServiceRouter(api)
 
-
 	// rendering static site
 	app.Static("/static", "../staticapp")
 	staticapp := app.Group("/static")
+	// static service api that may be used by the static site
 	staticservice.StaticServiceRouter(staticapp)
 
 	// rendering pre built react app
 	app.Static("/reactapp", "../reactapp/build")
 	app.Static("*", "../reactapp/build/index.html")
-
 
 	log.Fatal(app.Listen("127.0.0.1:3000"))
 }
